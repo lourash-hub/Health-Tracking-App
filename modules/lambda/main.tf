@@ -17,12 +17,12 @@ resource "aws_security_group" "lambda_sg" {
 }
 
 resource "aws_lambda_function" "lambda" {
-  filename         = "lambda_function_payload.zip"
+  filename         = "../../lambda_function_payload.zip"
   function_name    = "HealthDataIngestion"
   role             = aws_iam_role.lambda_exec_role.arn
   handler          = "index.handler"
   runtime          = "nodejs14.x"
-  source_code_hash = filebase64sha256("lambda_function_payload.zip")
+  source_code_hash = filebase64sha256("${path.module}/../../lambda_function_payload.zip")
   vpc_config {
     security_group_ids = [aws_security_group.lambda_sg.id]
     subnet_ids         = var.subnet_ids
