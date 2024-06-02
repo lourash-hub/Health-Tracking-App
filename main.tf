@@ -25,3 +25,8 @@ module "api_gateway" {
   source = "./modules/api_gateway"
   lambda_function_arn = module.lambda.lambda_function_arn
 }
+
+module "testing" {
+  source = "./modules/testing"
+  availability_zones = var.availability_zones
+}
